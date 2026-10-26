@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="it"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spotify callback</title>
+<style>body{font:16px system-ui;max-width:680px;margin:3em auto;padding:0 1em}textarea{width:100%;min-height:5em}button{padding:.7em 1em}</style>
+<h1>Autorizzazione Spotify</h1><p>Copia il codice qui sotto nel pannello web dell'ESP32. Il codice è temporaneo e utilizzabile una sola volta.</p>
+<label>Codice OAuth</label><textarea id="code" readonly></textarea><p id="msg"></p><script>
+const p=new URLSearchParams(location.search), code=p.get('code'), err=p.get('error'), state=p.get('state');
+const box=document.querySelector('#code'), msg=document.querySelector('#msg');
+if(err){msg.textContent='Autorizzazione non concessa: '+err;}else if(!code){msg.textContent='Codice mancante. Torna al display e riprova.';}else{box.value=code;msg.textContent='State: '+(state||'mancante')+'. Copia il codice e incollalo nel pannello ESP32.';}
+</script></html>
